@@ -4,10 +4,10 @@ import numpy as np
 import pyboof as pb
 
 # define a video capture object
-# cam = cv2.VideoCapture(0)
-cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cam = cv2.VideoCapture(0)
+#cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+#cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+#cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 detector = pb.FactoryFiducial(np.uint8).qrcode()
 
@@ -23,22 +23,9 @@ while(True):
         # # Display the resulting frame
         # cv2.imshow('initialFrame', frame)
 
-        # Choose a crop ratio
-        crop_ratio = 3/4
 
-        # Find the position of each border
-        height, width, _ = frame.shape
-        side_length = height * crop_ratio
-        top_border = int((height/2) - (side_length/2))
-        bottom_border = int((height/2) + (side_length/2))
-        left_border = int((width/2) - (side_length/2))
-        right_border = int((width/2) + (side_length/2))
-
-        # Slice the initial image
-        frame = frame[top_border:bottom_border, left_border:right_border]
-        # cv2.imshow('centerFrame', frame)
-
-        detector.detect(frame)
+        boof_img = pb.ndarray_to_boof(frame)
+        detector.detect(boof_img)
 
         print("Detected a total of {} QR Codes".format(len(detector.detections)))
 
