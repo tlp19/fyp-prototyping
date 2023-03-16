@@ -97,7 +97,7 @@ while(True):
     # the 'q' button is set as the
     # quitting button you may use any
     # desired button of your choice
-    if cv2.waitKey(5) & 0xFF == ord('q'):
+    if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
 # After the loop release the cap object
