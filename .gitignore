@@ -1,3 +1,5 @@
 /.venv
 /lin-venv
-**/*-model
+**/*-model/*.weights
+**/*-model/*.pb
+**/*-model/*.tflite
