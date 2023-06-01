@@ -1,5 +1,5 @@
-/.venv
-/lin-venv
+/.venv**
+/lin-venv**
 **/*-model/*.weights
 **/*-model/*.pb
 **/*-model/*.tflite
