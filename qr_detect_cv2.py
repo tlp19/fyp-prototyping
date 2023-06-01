@@ -3,10 +3,10 @@ import cv2
 import numpy as np
 
 # define a video capture object
-# cam = cv2.VideoCapture(0)
-cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cam = cv2.VideoCapture(0)
+#cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+#cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+#cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 detector = cv2.QRCodeDetector()
 
