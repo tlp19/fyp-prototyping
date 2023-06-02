@@ -3,4 +3,7 @@
 **/*-model/*.weights
 **/*-model/*.pb
 **/*-model/*.tflite
+
 .**
+
+**__pycache__**

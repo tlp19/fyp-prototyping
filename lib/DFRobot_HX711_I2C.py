@@ -12,7 +12,7 @@
 """
 import serial
 import time
-import smbus
+import smbus2
 import struct
 
 class DFRobot_HX711_I2C(object):
@@ -36,7 +36,7 @@ class DFRobot_HX711_I2C(object):
   #_mode      =  0
   #   idle =    0
   def __init__(self ,bus,address):
-    self.i2cbus = smbus.SMBus(bus)
+    self.i2cbus = smbus2.SMBus(bus)
     self._addr = address
     self.idle =    0
 

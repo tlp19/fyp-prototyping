@@ -16,7 +16,7 @@ hx711.begin()
 print("start\r\n")
 
 # Manually set the calibration values
-hx711.set_calibration(2210.0)
+hx711.set_calibration(2127.0)  #2236, 2127
 # Tare the sensor
 hx711.peel();
 
