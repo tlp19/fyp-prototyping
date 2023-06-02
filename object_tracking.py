@@ -8,7 +8,7 @@ cam = cv2.VideoCapture(0)
 cam.set(cv2.CAP_PROP_AUTOFOCUS, 0)
 
 # Choose a tracker type
-tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
+tracker_types = ['MIL','KCF', 'GOTURN', 'MOSSE']
 tracker_type = tracker_types[0]
 
 if tracker_type == 'MIL':
