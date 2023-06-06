@@ -67,7 +67,7 @@ class DFRobot_HX711_I2C(object):
       self._calibration = b[0]
     #Serial.println("pppppppppppppppppppppp----------------------");
     #print(value);
-    print(self._calibration)
+    # print(self._calibration)
     return ((value - self._offset)/self._calibration) 
 
    

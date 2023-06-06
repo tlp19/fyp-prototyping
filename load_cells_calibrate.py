@@ -12,7 +12,7 @@ hx711 = DFRobot_HX711_I2C(IIC_MODE, IIC_ADDRESS)
 
 # Set the trigger threshold (G) for automatic calibration of the weight sensor module. When only the weight of the object on the scale is greater than this value, the module will start the calibration process
 # This value cannot be greater than the calibration weight of the set_cal_weight() setting
-hx711.set_threshold(20)
+hx711.set_threshold(10)
 # Set the calibration weight when the weight sensor module is automatically calibrated (g)
 hx711.set_cal_weight(53)
 

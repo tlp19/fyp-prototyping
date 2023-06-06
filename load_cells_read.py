@@ -16,12 +16,13 @@ hx711.begin()
 print("start\r\n")
 
 # Manually set the calibration values
-hx711.set_calibration(2127.0)  #2236, 2127
+hx711.set_calibration(2395.5)  # 2236, 2127, 2260.1, 2395.5
 # Tare the sensor
 hx711.peel();
 
 while(1):
   # Get the weight of the object
   data = hx711.read_weight(10)
-  print('weight is %.1f g' % data)
+  weight = - data
+  print('weight is %.1f g' % weight)
   time.sleep(2)
