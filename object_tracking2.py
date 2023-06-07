@@ -102,7 +102,7 @@ while(True):
         previous_frame = prepared_frame
 
         # Dilate the detected changes to fill in small gaps
-        DIFF_DILATION = 10
+        DIFF_DILATION = 3
         kernel = np.ones((DIFF_DILATION, DIFF_DILATION))
         diff_frame = cv2.dilate(diff_frame, kernel, 1)
 
@@ -114,7 +114,7 @@ while(True):
         contours, _ = cv2.findContours(image=thresh_frame, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
 
         # Check if there is any significant motion
-        MIN_CONTOUR_AREA = 3000
+        MIN_CONTOUR_AREA = 2500
         contours = [c for c in contours if cv2.contourArea(c) > MIN_CONTOUR_AREA]
         bounding_boxes = [cv2.boundingRect(c) for c in contours]
         
@@ -131,17 +131,19 @@ while(True):
         
         # Find all the bounding boxes that overlap more that 50% with the expanded tracking box
         SEARCH_EXPANSION_FACTOR = 1.1
-        FRAGMENTED_BOX_OVERLAP_W_SEARCH = 0.5
-        SEARCH_OVERLAP_W_BIG_MOTION = 0.9
-        expanded_tracking_box = expand_box(tracking_box, SEARCH_EXPANSION_FACTOR)
-        intersecting_boxes = [box for box in bounding_boxes
-                              if (percentage_inside(box, expanded_tracking_box) > FRAGMENTED_BOX_OVERLAP_W_SEARCH)
-                              or (percentage_inside(expanded_tracking_box, box) > SEARCH_OVERLAP_W_BIG_MOTION)]
+        FRAGMENTED_BOX_OVERLAP_W_SEARCH = 0.75
+        SEARCH_OVERLAP_W_BIG_MOTION = 0.85
+        search_box = expand_box(tracking_box, SEARCH_EXPANSION_FACTOR)
+        intersecting_boxes = [current_bbox for current_bbox in bounding_boxes
+                              if (percentage_inside(current_bbox, search_box) > FRAGMENTED_BOX_OVERLAP_W_SEARCH)
+                              or (percentage_inside(search_box, current_bbox) > SEARCH_OVERLAP_W_BIG_MOTION)]
 
         # Find the bounding box that encompasses all the intersecting boxes
-        ALLOWED_DIM_REDUCTION_FACTOR = 0.5
-        ALLOWED_DIM_AUGMENTATION_FACTOR = 3
-        ALLOWED_MAX_AREA = 0.7 * cam_width * cam_height
+        ALLOWED_DIM_REDUCTION_FACTOR = 0.6
+        ALLOWED_DIM_AUGMENTATION_FACTOR = 2.5
+        ALLOWED_MAX_AREA = 0.80 * cam_width * cam_height
+
+        tracking_succeeded = False
         if (len(intersecting_boxes) > 0):
             candidate_tracking_box = find_global_bounding_box(intersecting_boxes)
             # Use the global box if it is not significantly smaller than the tracking box
@@ -152,13 +154,20 @@ while(True):
             and (candidate_tracking_box[3] < ALLOWED_DIM_AUGMENTATION_FACTOR * tracking_box[3])
             and (candidate_tracking_box[2] * candidate_tracking_box[3] < ALLOWED_MAX_AREA)):
                 tracking_box = candidate_tracking_box
+                tracking_succeeded = True
         else:
             # No intersecting boxes; use the previous tracking box
             pass
 
         # Draw the updated tracking box
         t_frame = frame.copy()
-        cv2.rectangle(t_frame, (int(tracking_box[0]), int(tracking_box[1])), (int(tracking_box[0] + tracking_box[2]), int(tracking_box[1] + tracking_box[3])), (255, 0, 0), 2)
+        
+        #debug
+        for box in intersecting_boxes:
+            colour = (0,255,0) if tracking_succeeded else (0,0,255)
+            cv2.rectangle(t_frame, (int(box[0]), int(box[1])), (int(box[0] + box[2]), int(box[1] + box[3])), colour, 2)
+        
+        cv2.rectangle(t_frame, (int(tracking_box[0]), int(tracking_box[1])), (int(tracking_box[0] + tracking_box[2]), int(tracking_box[1] + tracking_box[3])), (255, 0, 0), 3)
         cv2.imshow('Tracking Box', t_frame)
 
     # the 'q' button is set as the

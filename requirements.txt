@@ -4,3 +4,4 @@ pyzbar==0.1.9
 pyboof
 pyserial
 smbus2
+RPi.GPIO
