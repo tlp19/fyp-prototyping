@@ -7,7 +7,7 @@ GPIO.setup(32, GPIO.OUT)
 pwm = GPIO.PWM(32, 50)
 pwm.start(0)
 
-DUTY_BRACKET = (1000, 1750)
+DUTY_BRACKET = (1000, 1700)
 
 def duty_from_dir(dir):
     dir = min(1.0, max(-1.0, dir))      # Cutoff the direction between 1 and -1
@@ -25,7 +25,6 @@ def duty_from_dir(dir):
     return round(duty, 3)
 
 try:
-    # Make the continuous servo turn
     time.sleep(0.5)
     pwm.ChangeDutyCycle(duty_from_dir(0.5))
     time.sleep(1.1)

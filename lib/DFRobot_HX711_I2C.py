@@ -63,7 +63,7 @@ class DFRobot_HX711_I2C(object):
     if ppFlag == 1:
       self._offset = self.average(times)
     elif ppFlag == 2:
-      b = self.getCalibration()
+      b = self.get_calibration()
       self._calibration = b[0]
     #Serial.println("pppppppppppppppppppppp----------------------");
     #print(value);
