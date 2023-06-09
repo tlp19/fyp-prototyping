@@ -20,7 +20,7 @@ loadcell2.set_calibration(2377)
 # from on-chip cal script: (2265, 2315), (2249.37, 2338.22)
 # from custom script: (2298, 2190), (2142, 2377)
 
-time.sleep(2)
+time.sleep(0.5)
 
 # Tare the sensors
 loadcell1.peel()
