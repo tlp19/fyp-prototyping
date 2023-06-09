@@ -68,8 +68,18 @@ class DFRobot_HX711_I2C(object):
     #Serial.println("pppppppppppppppppppppp----------------------");
     #print(value);
     # print(self._calibration)
-    print("value:", value, " - offset:", self._offset)
+    # print("value:", value, " - offset:", self._offset)
     return ((value - self._offset)/self._calibration)
+  
+  def read_value(self,times):
+    '''!
+      @fn read_value
+      @brief Get the value read by the scales
+      @param times Take the average several times
+      @return Return the read value
+    '''
+    value = self.average(times)
+    return value
 
    
 
