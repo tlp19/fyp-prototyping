@@ -13,8 +13,8 @@ loadcell1.begin()
 loadcell2.begin()
 
 # Manually set the calibration values
-loadcell1.set_calibration(2249)
-loadcell2.set_calibration(2338)
+loadcell1.set_calibration(2298)
+loadcell2.set_calibration(2190)
 
 # (2270, 2225), (2221, 2281), (2248.98, 2219.49), (2240, 2245), (2250, 2280), (2265, 2295)
 # from cal script: (2265, 2315), (2249.37, 2338.22)
@@ -29,8 +29,8 @@ print("start\r\n")
 
 while(1):
   # Get the weight of the object
-  data1 = loadcell1.read_weight(25)
-  data2 = loadcell2.read_weight(25)
+  data1 = loadcell1.read_weight(20)
+  data2 = loadcell2.read_weight(20)
   weight = - (data1 + data2)
   print(f'weight is {weight:.2f} g   ({-data1:.2f} + {-data2:.2f})')
-  time.sleep(0.1)
+  time.sleep(0.05)

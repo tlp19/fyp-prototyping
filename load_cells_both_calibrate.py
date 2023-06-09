@@ -14,8 +14,8 @@ loadcell2 = DFRobot_HX711_I2C(IIC_MODE, IIC_ADDRESS_2)
 loadcell1.set_threshold(20)
 loadcell2.set_threshold(20)
 # Set the calibration weight when the weight sensor module is automatically calibrated (g)
-loadcell1.set_cal_weight(54)
-loadcell2.set_cal_weight(54)
+loadcell1.set_cal_weight(84)
+loadcell2.set_cal_weight(84)
 
 loadcell1.enable_cal()
 loadcell2.enable_cal()
@@ -25,6 +25,7 @@ while (cond < 2):
   time.sleep(1)
   cond = cond + int(loadcell1.get_cal_flag()) + int(loadcell2.get_cal_flag())
 
+time.sleep(1.5)
 print("")
 print("The calibration value of the sensors are: ")
 # Obtain the calibration value. The accurate calibration value can be obtained after the calibration operation is completed
