@@ -5,3 +5,6 @@ pyboof==0.41
 pyserial==3.5
 smbus2==0.4.2
 RPi.GPIO==0.7.1
+adafruit-blinka==8.19.0
+rpi_ws281x==5.0.0
+adafruit-circuitpython-neopixel==6.3.9
