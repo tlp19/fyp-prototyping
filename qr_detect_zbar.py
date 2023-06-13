@@ -6,7 +6,7 @@ from pyzbar.pyzbar import ZBarSymbol
 
 # define a video capture object
 # cam = cv2.VideoCapture(0)
-cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+cam = cv2.VideoCapture(2)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
